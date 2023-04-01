@@ -2,8 +2,8 @@ importlib_metadata==6.1.0
 matplotlib==3.7.1
 numpy==1.23.5
 pandas==1.5.3
-Pillow==9.5.0
-scikit-mage==0.20.0
+Pillow==9.4.0
+scikit-image==0.20.0
 streamlit==1.20.0
 tensorflow==2.12.0
 tensorflow-intel==2.12.0
