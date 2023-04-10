@@ -1,4 +1,3 @@
-import importlib_metadata 
 import streamlit as st
 import tensorflow as tf
 import numpy as np
@@ -29,7 +28,7 @@ with tabs[0]:
         #               1   2   3   4   5   6   7   8   9      10  11  12  13  14  15  16  17  18  19  20  21  22  23  24 
     class_names = ['A','B','C','D','E','F','G','H','I','','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y']
     ##########################################################################################
-    uploaded_files = st.file_uploader("", type=["JPEG"], accept_multiple_files=True)
+    uploaded_files = st.file_uploader("", type=["jpg"], accept_multiple_files=True)
     if uploaded_files or st.session_state.load_state:
         st.session_state.load_state = True
         if uploaded_files:
@@ -51,7 +50,8 @@ with tabs[0]:
                     confidenceCNN = round(predictionCNN[0,MaxPositionCNN]*100, 1)
                     predictionCNN_label=class_names[MaxPositionCNN]
                     #SA
-                    modelSA = tf.keras.models.load_model("SA/50SA_model.h5")
+                    modelSA = tf.keras.models.load_model("SA/50SAmodel.h5")
+                    #modelSA = tf.keras.models.load_model("SA/1new50SA_model.h5")
                     predictionSA = modelSA.predict(image_input) 
                     MaxPositionSA=np.argmax(predictionSA)  
                     confidenceSA = round(predictionSA[0,MaxPositionSA]*100, 1)
@@ -61,12 +61,12 @@ with tabs[0]:
                     # for CNN store 24 Letters into array
                     for i in range(len(Letters)):
                         if predictionCNN_label == Letters[i]:
-                            imageCNN = Image.open("image_input/"+str(Letters[i])+".jpeg") 
+                            imageCNN = Image.open("Alpahbet_Letters/"+str(Letters[i])+".jpeg") 
                             break
                         # for Augmentation store 24 Letters into array
                     for i in range(len(Letters)):
                         if predictionSA_label == Letters[i]:
-                            imageSA = Image.open("image_input/"+str(Letters[i])+".jpeg") 
+                            imageSA = Image.open("Alpahbet_Letters/"+str(Letters[i])+".jpeg") 
                             break
                     fig = plt.figure(figsize = (12, 8))
                     #Plotting the accuracy training using graph presentation CNN
@@ -155,7 +155,7 @@ with tabs[1]:
     st.markdown("<h5 style='text-align: left;'> Predicted = ("+ str(count) +"/24) </h5>", unsafe_allow_html=True)
 ##################################################################
     plt.tight_layout(pad=0.5)
-    plt.show()
+    #plt.show()
     st.pyplot(fig)
 ################################################################################################
     #end of CNN Baseline Prediction
@@ -166,8 +166,9 @@ with tabs[2]:
     fig, axes = plt.subplots(nrows=4, ncols=6, figsize=(12, 12),
                             subplot_kw={'xticks': [], 'yticks': []})
 ##################################################################
-    #modelSA = tf.keras.models.load_model("SA/100SA_model.h5")
     modelSA = tf.keras.models.load_model("SA/50SA_model.h5")
+    #modelSA = tf.keras.models.load_model("SA/1new50SA_model.h5")
+    #modelSA = tf.keras.models.load_model("SA/HorizontalFlipFalse50SA_model.h5")
     #               1   2   3   4   5   6   7   8   9      10  11  12  13  14  15  16  17  18  19  20  21  22  23  24 
     class_names = ['A','B','C','D','E','F','G','H','I','','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y']
     for i, ax in enumerate(axes.flat):
@@ -198,7 +199,7 @@ with tabs[2]:
     st.markdown("<h5 style='text-align: left;'> Predicted = ("+ str(count) +"/24) </h5>", unsafe_allow_html=True)
 ##################################################################
     plt.tight_layout(pad=0.5)
-    plt.show()
+    #plt.show()
     st.pyplot(fig)
 ################################################################################################
     #end of CNN with Style Augmentation Prediction
