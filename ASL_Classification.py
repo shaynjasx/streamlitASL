@@ -61,12 +61,12 @@ with tabs[0]:
                     # for CNN store 24 Letters into array
                     for i in range(len(Letters)):
                         if predictionCNN_label == Letters[i]:
-                            imageCNN = Image.open("Alpahbet_Letters/"+str(Letters[i])+".jpeg") 
+                            imageCNN = Image.open("image_input/"+str(Letters[i])+".jpeg") 
                             break
                         # for Augmentation store 24 Letters into array
                     for i in range(len(Letters)):
                         if predictionSA_label == Letters[i]:
-                            imageSA = Image.open("Alpahbet_Letters/"+str(Letters[i])+".jpeg") 
+                            imageSA = Image.open("image_input/"+str(Letters[i])+".jpeg") 
                             break
                     fig = plt.figure(figsize = (12, 8))
                     #Plotting the accuracy training using graph presentation CNN
